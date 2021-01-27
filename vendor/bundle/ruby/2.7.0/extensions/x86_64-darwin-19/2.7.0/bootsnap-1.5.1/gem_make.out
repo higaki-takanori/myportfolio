@@ -1,0 +1,15 @@
+current directory: /Users/higaki_takanori/Documents/myProgramming/my_portfolio/minnano_asobi/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.5.1/ext/bootsnap
+/Users/higaki_takanori/.rbenv/versions/2.7.1/bin/ruby -I /Users/higaki_takanori/.rbenv/versions/2.7.1/lib/ruby/2.7.0 -r ./siteconf20210126-43172-1m4zgfb.rb extconf.rb
+creating Makefile
+
+current directory: /Users/higaki_takanori/Documents/myProgramming/my_portfolio/minnano_asobi/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.5.1/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/higaki_takanori/Documents/myProgramming/my_portfolio/minnano_asobi/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.5.1/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/higaki_takanori/Documents/myProgramming/my_portfolio/minnano_asobi/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.5.1/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20210126-43172-10cc30m/bootsnap
