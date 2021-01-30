@@ -1,49 +1,48 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @play.title %>
-</p>
+<h1><%= @play.title %></h1>
+<h2>userの名前</h2>
 
-<p>
-  <strong>Place:</strong>
-  <%= @play.place %>
-</p>
+<!--  -->
+<div>
+  <%= image_tag @play.play_image_path.url if @play.play_image_path? %>
+</div>
+<div>
+  <strong>遊べる人数：</strong>
+  <%= @play.min_player %> ~ <%= @play.max_player %>
+</div>
+<div>
+  <strong>場所：</strong>
+  <%= @play.place %>  
+</div>
+<div>
+  <strong>道具：</strong>
+  道具
+</div>
+<div>
+  <%= time_ago_in_words(@play.updated_at) %>前に更新
+</div>
 
-<p>
-  <strong>Outline:</strong>
+<div>
+  <p>概要</p>
   <%= @play.outline %>
-</p>
+</div>
 
-<p>
-  <strong>Winnig content:</strong>
-  <%= @play.winnig_content %>
-</p>
+<div>
+  <p>勝ち負け</p>
+  <%= @play.outline %>
+</div>
 
-<p>
-  <strong>Min player:</strong>
-  <%= @play.min_player %>
-</p>
+<div>
+  <p>ルール</p>
+  <%= @play.outline %>
+</div>
 
-<p>
-  <strong>Max player:</strong>
-  <%= @play.max_player %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @play.user_id %>
-</p>
-
-<p>
-  <strong>Play image path:</strong>
-  <%= @play.play_image_path %>
-</p>
-
-<p>
-  <strong>Deleted at:</strong>
-  <%= @play.deleted_at %>
-</p>
+<div>
+  <p>手順</p>
+  <%# @rules.each do |rule| %>
+  <%# end %>
+</div>
 
 <%= link_to 'Edit', edit_play_path(@play) %> |
 <%= link_to 'Back', plays_path %>

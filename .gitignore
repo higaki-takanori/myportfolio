@@ -40,5 +40,5 @@
 yarn-debug.log*
 .yarn-integrity
 
-# vender
-/vender
+# vendor
+/vendor
