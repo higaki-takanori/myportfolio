@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Plays</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Place</th>
+      <th>Outline</th>
+      <th>Winnig content</th>
+      <th>Min player</th>
+      <th>Max player</th>
+      <th>User</th>
+      <th>Play image path</th>
+      <th>Deleted at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @plays.each do |play| %>
+      <tr>
+        <td><%= play.title %></td>
+        <td><%= play.place %></td>
+        <td><%= play.outline %></td>
+        <td><%= play.winnig_content %></td>
+        <td><%= play.min_player %></td>
+        <td><%= play.max_player %></td>
+        <td><%= play.user_id %></td>
+        <td><%= play.play_image_path %></td>
+        <td><%= play.deleted_at %></td>
+        <td><%= link_to 'Show', play %></td>
+        <td><%= link_to 'Edit', edit_play_path(play) %></td>
+        <td><%= link_to 'Destroy', play, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Play', new_play_path %>

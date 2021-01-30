@@ -1,0 +1,62 @@
+<%= form_with(model: play, local: true) do |form| %>
+  <% if play.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(play.errors.count, "error") %> prohibited this play from being saved:</h2>
+
+      <ul>
+        <% play.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :place %>
+    <%= form.text_field :place %>
+  </div>
+
+  <div class="field">
+    <%= form.label :outline %>
+    <%= form.text_area :outline %>
+  </div>
+
+  <div class="field">
+    <%= form.label :winnig_content %>
+    <%= form.text_area :winnig_content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :min_player %>
+    <%= form.number_field :min_player %>
+  </div>
+
+  <div class="field">
+    <%= form.label :max_player %>
+    <%= form.number_field :max_player %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :play_image_path %>
+    <%= form.text_area :play_image_path %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deleted_at %>
+    <%= form.datetime_select :deleted_at %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

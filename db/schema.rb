@@ -10,13 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_28_142027) do
+ActiveRecord::Schema.define(version: 2021_01_30_073859) do
+
+  create_table "plays", force: :cascade do |t|
+    t.string "title"
+    t.string "place"
+    t.text "outline"
+    t.text "winnig_content"
+    t.integer "min_player"
+    t.integer "max_player"
+    t.bigint "user_id"
+    t.text "play_image_path"
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.string "user_image_path"
+    t.text "user_image_path"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

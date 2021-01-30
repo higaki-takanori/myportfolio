@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @play.title %>
+</p>
+
+<p>
+  <strong>Place:</strong>
+  <%= @play.place %>
+</p>
+
+<p>
+  <strong>Outline:</strong>
+  <%= @play.outline %>
+</p>
+
+<p>
+  <strong>Winnig content:</strong>
+  <%= @play.winnig_content %>
+</p>
+
+<p>
+  <strong>Min player:</strong>
+  <%= @play.min_player %>
+</p>
+
+<p>
+  <strong>Max player:</strong>
+  <%= @play.max_player %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @play.user_id %>
+</p>
+
+<p>
+  <strong>Play image path:</strong>
+  <%= @play.play_image_path %>
+</p>
+
+<p>
+  <strong>Deleted at:</strong>
+  <%= @play.deleted_at %>
+</p>
+
+<%= link_to 'Edit', edit_play_path(@play) %> |
+<%= link_to 'Back', plays_path %>
