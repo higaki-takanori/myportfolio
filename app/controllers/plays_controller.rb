@@ -56,6 +56,20 @@ class PlaysController < ApplicationController
     end
   end
 
+  def search
+    @plays = Play.where(title: params[:title])
+    .or(Play.where(place: params[:place]))
+    .or(Play.where(min_player: params[:min_player]))
+    .or(Play.where(max_player: params[:max_player]))
+    if params[:title].eql?("") && params[:place].eql?("") && params[:min_player].eql?("") && params[:max_player].eql?("")
+      @plays = Play.all
+    end
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render :index, status: :ok, location: @play}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_play

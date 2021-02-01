@@ -2,11 +2,32 @@
 
 <h1>遊び一覧</h1>
 
-<div>
-  
+<div class="search">
+  <%= form_with(model: @play, url: search_path, method: :get, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div class="field">
+    <%= form.label :place %>
+    <%= form.text_field :place %>
+  </div>
+  <div class="field">
+    <%= form.label :min_player %>
+    <%= form.number_field :min_player %>
+  </div>
+
+  <div class="field">
+    <%= form.label :max_player %>
+    <%= form.number_field :max_player %>
+  </div>
+  <div class="actions">
+    <%= form.submit "検索" %>
+  </div>
+<% end %>
 </div>
 
-<div class="play">
+<div class="index">
   <% @plays.each do |play| %>
     <li id="play-<%= play.id %>">
       <%= link_to play_path(play) do %>
