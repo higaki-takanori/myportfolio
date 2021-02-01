@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  play_id: 
+  rule_image_path: MyText
+  rule_content: MyText
+  deleted_at: 2021-02-01 12:55:02
+
+two:
+  play_id: 
+  rule_image_path: MyText
+  rule_content: MyText
+  deleted_at: 2021-02-01 12:55:02
