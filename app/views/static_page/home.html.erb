@@ -5,16 +5,19 @@
 </header>
 
 <body>
-  <div>
-    <%= link_to "遊びを探す", plays_path %>
-  </div>
-  <div>
-    <%= link_to "遊びを作る", new_play_path %>
-  </div>
-  <div>
-    <%= link_to "会員登録", new_user_path %>
-  </div>
-  <div>
-  <%= link_to "ログイン", login_path %>
-  </div>
+  <% if logged_in? %>
+    <div>
+      <%= link_to "遊びを探す", plays_path %>
+    </div>
+    <div>
+      <%= link_to "遊びを作る", new_play_path %>
+    </div>
+  <% else %>
+    <div>
+      <%= link_to "会員登録", new_user_path %>
+    </div>
+    <div>
+    <%= link_to "ログイン", login_path %>
+    </div>
+  <% end %>
 </body>

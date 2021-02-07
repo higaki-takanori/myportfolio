@@ -1,5 +1,6 @@
 class PlaysController < ApplicationController
   before_action :set_play, only: %i[ show edit update destroy ]
+  before_action :logged_in_user, only: [:show, :edit, :update, :index, :destroy]
 
   # GET /plays or /plays.json
   def index
