@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   mount_uploader :user_image_path, UserImageUploader
+  has_many :likes
+  has_many :plays
   attr_accessor :remember_token
 
   validates :name, 

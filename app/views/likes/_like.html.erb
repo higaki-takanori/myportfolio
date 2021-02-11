@@ -1,0 +1,6 @@
+      <% if play.liked_by?(current_user) %>
+        <p><%= link_to "お気に入り解除", play_likes_path(play), method: :delete %></p>
+      <% else %>
+        <p><%= link_to "お気に入り登録", play_likes_path(play), method: :post %></p>
+      <% end %>
+      <%= play.likes.count %>

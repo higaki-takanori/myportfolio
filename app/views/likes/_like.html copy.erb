@@ -1,0 +1,6 @@
+      <% if play.liked_by?(current_user) %>
+        <p>お気に入り解除</p>
+      <% else %>
+        <p><%= link_to "お気に入り登録", play_likes_path %></p>
+      <% end %>
+      <%= play.likes.count %>

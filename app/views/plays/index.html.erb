@@ -36,13 +36,13 @@
           <tr>
             <td><%= play.title %></td>
             <td class="user-name">Userの名前</td>
-            <td>favorite</td>
           </tr>
           <tr><td><%= play.place %></td></tr>
           <tr><td>道具</td></tr>
           <tr><td><%= time_ago_in_words(play.updated_at) %>前に更新</td></tr>
         </table>
       <% end %>
+      <%= render "likes/like", play: play %>
     </li>
   <% end %>
 </div>
