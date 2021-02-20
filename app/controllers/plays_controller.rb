@@ -23,9 +23,13 @@ class PlaysController < ApplicationController
   # POST /plays or /plays.json
   def create
     @play = Play.new(play_params)
+    @tool = Tool.new(tool_params[:tool])
 
     respond_to do |format|
       if @play.save
+        @tool.play_id = @play.id
+        #byebug
+        @tool.save
         format.html { redirect_to @play, notice: "Play was successfully created." }
         format.json { render :show, status: :created, location: @play }
       else
@@ -80,5 +84,10 @@ class PlaysController < ApplicationController
     # Only allow a list of trusted parameters through.
     def play_params
       params.require(:play).permit(:title, :place, :outline, :winnig_content, :min_player, :max_player, :user_id, :play_image_path, :deleted_at)
+    end
+
+    # Only allow a list of trusted parameters through.
+    def tool_params
+      params.require(:play).permit(tool:[:tool_content])
     end
 end

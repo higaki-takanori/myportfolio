@@ -21,6 +21,15 @@
     <%= form.text_field :place %>
   </div>
 
+
+  <%= form.fields_for :tool do |tool| %>
+    <div class="field">
+      <%#= tool.hidden_field :play_id %>
+      <%= tool.label :tool_content %>
+      <%= tool.text_area :tool_content %>
+    </div>
+  <% end %>
+ 
   <div class="field">
     <%= form.label :outline %>
     <%= form.text_area :outline %>
@@ -43,7 +52,7 @@
 
   <div class="field">
     <%#= form.label :user_id %>
-    <%#= form.text_field :user_id %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
   </div>
 
   <div class="field">

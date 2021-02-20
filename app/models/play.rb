@@ -1,5 +1,7 @@
 class Play < ApplicationRecord
   mount_uploader :play_image_path, PlayImageUploader
+  has_many :rules
+  has_many :tools
   has_many :likes
   belongs_to :user
 
