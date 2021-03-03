@@ -1,6 +1,6 @@
 <h1>Editing Play</h1>
 
-<%= render 'form', play: @play %>
+<%= render 'form', {play: @play, tool: @tool} %>
 
 <%= link_to 'Show', @play %> |
 <%= link_to 'Back', plays_path %>

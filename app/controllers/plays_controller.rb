@@ -28,7 +28,6 @@ class PlaysController < ApplicationController
     respond_to do |format|
       if @play.save
         @tool.play_id = @play.id
-        #byebug
         @tool.save
         format.html { redirect_to @play, notice: "Play was successfully created." }
         format.json { render :show, status: :created, location: @play }
@@ -41,8 +40,10 @@ class PlaysController < ApplicationController
 
   # PATCH/PUT /plays/1 or /plays/1.json
   def update
+    @tool = Tool.find_by(play_id: params[:id])
+    #byebug
     respond_to do |format|
-      if @play.update(play_params)
+      if @play.update(play_params) && @tool.update(tool_params[:tool])
         format.html { redirect_to @play, notice: "Play was successfully updated." }
         format.json { render :show, status: :ok, location: @play }
       else

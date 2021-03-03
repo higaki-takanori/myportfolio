@@ -17,14 +17,27 @@
   </div>
 
   <div class="field">
+    <%= form.label :play_image_path %>
+    <%= form.file_field :play_image_path %>
+  </div>
+
+  <div class="field">
+    <%= form.label :min_player %>
+    <%= form.number_field :min_player %>
+  </div>
+
+  <div class="field">
+    <%= form.label :max_player %>
+    <%= form.number_field :max_player %>
+  </div>
+
+  <div class="field">
     <%= form.label :place %>
     <%= form.text_field :place %>
   </div>
 
-
   <%= form.fields_for :tool do |tool| %>
     <div class="field">
-      <%#= tool.hidden_field :play_id %>
       <%= tool.label :tool_content %>
       <%= tool.text_area :tool_content %>
     </div>
@@ -41,29 +54,28 @@
   </div>
 
   <div class="field">
-    <%= form.label :min_player %>
-    <%= form.number_field :min_player %>
-  </div>
-
-  <div class="field">
-    <%= form.label :max_player %>
-    <%= form.number_field :max_player %>
-  </div>
-
-  <div class="field">
     <%#= form.label :user_id %>
     <%= form.hidden_field :user_id, value: current_user.id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :play_image_path %>
-    <%= form.file_field :play_image_path %>
   </div>
 
   <div class="field">
     <%#= form.label :deleted_at %>
     <%#= form.datetime_select :deleted_at %>
   </div>
+
+  <div class="add-form-btn">追加する</div>
+
+  <div class="field">
+    <div class="rule-form"></div>
+
+  </div>
+
+  <p>テスト</p>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("p").text("成功！！");
+    });
+  </script>
 
   <div class="actions">
     <%= form.submit "登録" %>
