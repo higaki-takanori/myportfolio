@@ -24,7 +24,7 @@ class PlaysController < ApplicationController
   def create
     @play = Play.new(play_params)
     @tool = Tool.new(tool_params[:tool])
-
+    binding.pry
     respond_to do |format|
       if @play.save
         @tool.play_id = @play.id
@@ -90,5 +90,9 @@ class PlaysController < ApplicationController
     # Only allow a list of trusted parameters through.
     def tool_params
       params.require(:play).permit(tool:[:tool_content])
+    end
+
+    def rule_params
+      params.require(:play).permit(:rule_content, :rule_image_path)
     end
 end

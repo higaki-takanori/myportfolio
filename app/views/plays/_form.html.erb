@@ -36,12 +36,12 @@
     <%= form.text_field :place %>
   </div>
 
-  <%= form.fields_for :tool do |tool| %>
-    <div class="field">
+  <div class="field">
+    <%= form.fields_for :tool do |tool| %>
       <%= tool.label :tool_content %>
       <%= tool.text_area :tool_content %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
  
   <div class="field">
     <%= form.label :outline %>
@@ -63,19 +63,20 @@
     <%#= form.datetime_select :deleted_at %>
   </div>
 
-  <div class="add-form-btn">追加する</div>
-
   <div class="field">
-    <div class="rule-form"></div>
-
+    <%= form.fields_for :rule do |rule| %>
+      <div class="rule-form">
+        <div class="rule-list" data-index=<%"#{rule.index}"%> >
+          <%= rule.label :rule_content %>
+          <%= rule.text_area :rule_content, name: 'play[rule_content][]' %>
+          <%= rule.file_field :rule_image_path, name: 'play[rule_image_path][]' %>
+          <button type="button" class="delete-form-btn btn btn-danger">削除する</button>
+        </div>
+      </div>
+    <% end %>
   </div>
 
-  <p>テスト</p>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $("p").text("成功！！");
-    });
-  </script>
+  <button type="button" class="add-form-btn btn btn-primary">追加する</button>
 
   <div class="actions">
     <%= form.submit "登録" %>

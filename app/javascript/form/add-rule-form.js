@@ -1,30 +1,35 @@
-$(function(){
-  function buildField(index) {
-    const html = `<div class="rule-form-list" data-index=${index}>
-                    <label for="rule_content">ルール ${index}</label>
-                    <textarea name="post[rules_attributes][${index}][content]" id="post_rules_attributes_${index}_content"></textarea>
-                    <span class="delete-form-btn">
-                    削除する
-                    </span>
-                   </div>`;
-    return html;
-  }
-  let fileIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] // 追加するフォームのインデックス番号を用意
-  var lastIndex = $(".rule-form-list:last").data("index"); // 編集フォーム用（すでにデータがある分のインデックス番号が何か取得しておく）
-  console.log(lastIndex);
-  fileIndex.splice(0, lastIndex);// 編集フォーム用（データがある分のインデックスをfileIndexから除いておく）
-  let fileCount = $(".hidden-destroy").length; // 編集フォーム用（データがある分のフォームの数を取得する）
-  let displayCount = $(".rule-form-list").length; // 見えているフォームの数を取得する
-  $(".hidden-destroy").hide(); // 編集フォーム用（削除用のチェックボックスを非表示にしておく）
-  if (fileIndex.length == 0) $(".add-form-btn").css("display","none"); // 編集フォーム用（フォームが10つある場合は追加ボタンを非表示にしておく）
-  $(".add-form-btn").on("click", function(){
-    $(".rule-form").append(buildField(fileIndex[0]));
-    fileIndex.shift(); // fileIndexの一番小さい数字を取り除く
-    if (fileIndex.length == 0) $(".add-form-btn").css("display","none"); // フォームが５つになったら追加ボタンを非表示にする
-    displayCount += 1; // 見えているフォームの数をカウントアップしておく
+$("turbolinks:load", function(){
+  var maxCount = 20;
+  var minCount = 1;  
+  // 追加
+  $('.add-form-btn').on('click', function(){
+    //var inputCount = $('.rule-form .rule-list').length;
+    var inputCount = $('.rule-form .rule-list').length;
+    if (inputCount < maxCount){
+      var element = $('.rule-form .rule-list:last-child').clone(true);// 末尾をイベントごと複製
+      
+      // 複製したinputのクリア
+      var inputList = element[0].querySelectorAll('input[type="text"], textarea');
+      var inputFile = element[0].querySelectorAll('input[type="file"]');
+      
+      for (var i = 0; i < inputList.length; i++) {
+        inputList[i].value = "";
+        inputFile[i].value = "";
+      }
+      $('.rule-form .rule-list').parent().append(element);// 末尾追加
+    }
+    else {
+      alert("登録できるのは、"+ minCount + "~" + maxCount + "ルールです。");
+    }
   });
-  
-  $(".rule-form").on("click", ".delete-form-btn", function() {
-    alert("aタグ .click() のイベントだよぉ〜！");
+  // 削除
+  $('.delete-form-btn').on('click', function(){// イベントごと複製しているのでonのselectorは未設定
+    var inputCount = $('.rule-form .rule-list').length;
+    if (inputCount > minCount){
+      $(this).closest('.rule-list').remove();
+    }
+    else {
+      alert("登録できるのは、"+ minCount + "~" + maxCount + "ルールです。");
+    }
   });
-});
+})
