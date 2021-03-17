@@ -4,7 +4,8 @@ class PlaysController < ApplicationController
 
   # GET /plays or /plays.json
   def index
-    @plays = Play.all
+    #@plays = Play.all
+    @plays = Play.paginate(page: params[:page])
   end
 
   # GET /plays/1 or /plays/1.json
@@ -24,11 +25,15 @@ class PlaysController < ApplicationController
   def create
     @play = Play.new(play_params)
     @tool = Tool.new(tool_params[:tool])
-    binding.pry
     respond_to do |format|
       if @play.save
         @tool.play_id = @play.id
         @tool.save
+        rule_params.each do |tmp, content_hash|
+          @rule = Rule.new(rule_content: content_hash["content"], rule_image_path: content_hash["image"])
+          @rule.play_id = @play.id
+          @rule.save
+        end
         format.html { redirect_to @play, notice: "Play was successfully created." }
         format.json { render :show, status: :created, location: @play }
       else
@@ -41,9 +46,28 @@ class PlaysController < ApplicationController
   # PATCH/PUT /plays/1 or /plays/1.json
   def update
     @tool = Tool.find_by(play_id: params[:id])
-    #byebug
+    if @tool == nil
+      @tool = Tool.new(tool_params[:tool])
+      @tool.play_id = @play.id
+    end
     respond_to do |format|
-      if @play.update(play_params) && @tool.update(tool_params[:tool])
+      if @play.update(play_params)
+        @tool.update(tool_params[:tool]) if @tool != nil
+        @rule = Rule.where(play_id: params[:id])
+        binding.pry
+        if @rule.empty?
+          rule_params.each do |tmp, content_hash|
+            @rule = Rule.new(rule_content: content_hash["content"], rule_image_path: content_hash["image"])
+            @rule.play_id = @play.id
+            @rule.save
+          end
+        else
+          @rule.each do |rule|
+            rule_params.each do |tmp, content_hash|
+              rule.update(rule_content: content_hash["content"], rule_image_path: content_hash["image"])
+            end
+          end          
+        end
         format.html { redirect_to @play, notice: "Play was successfully updated." }
         format.json { render :show, status: :ok, location: @play }
       else
@@ -63,12 +87,12 @@ class PlaysController < ApplicationController
   end
 
   def search
-    @plays = Play.where(title: params[:title])
-    .or(Play.where(place: params[:place]))
-    .or(Play.where(min_player: params[:min_player]))
-    .or(Play.where(max_player: params[:max_player]))
+    @plays = Play.where(title: params[:title]).paginate(page: params[:page])
+    .or(Play.where(place: params[:place]).paginate(page: params[:page]))
+    .or(Play.where(min_player: params[:min_player]).paginate(page: params[:page]))
+    .or(Play.where(max_player: params[:max_player]).paginate(page: params[:page]))
     if params[:title].eql?("") && params[:place].eql?("") && params[:min_player].eql?("") && params[:max_player].eql?("")
-      @plays = Play.all
+      @plays = Play.paginate(page: params[:page])
     end
     respond_to do |format|
       format.html { render :index }
@@ -93,6 +117,6 @@ class PlaysController < ApplicationController
     end
 
     def rule_params
-      params.require(:play).permit(:rule_content, :rule_image_path)
+      params.require(:rule).permit!.to_hash
     end
 end

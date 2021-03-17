@@ -1,24 +1,30 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @play.title %></h1>
-<h2>userの名前</h2>
+<h2><%= @play.user.name %><%= image_tag @play.user.user_image_path.url if @play.user.user_image_path? %></h2>
 
 <!--  -->
 <div>
-  <%= image_tag @play.play_image_path.url if @play.play_image_path? %>
+  <%= image_tag @play.image_url, size: "200x200" %>
 </div>
 <div>
   <strong>遊べる人数：</strong>
-  <%= @play.min_player %> ~ <%= @play.max_player %>
+  <% if @play.min_player == @play.max_player %>
+    <%= @play.min_player %> 人
+  <% else %>
+    <%= @play.min_player %> ~ <%= @play.max_player %> 人
+  <% end %>
 </div>
 <div>
   <strong>場所：</strong>
   <%= @play.place %>  
 </div>
+
 <div>
   <strong>道具：</strong>
-  道具
+  <%= @play.tools[0].tool_content if @play.tools[0] != nil %>
 </div>
+
 <div>
   <%= time_ago_in_words(@play.updated_at) %>前に更新
 </div>
@@ -34,15 +40,12 @@
 </div>
 
 <div>
-  <p>ルール</p>
-  <%= @play.outline %>
-</div>
-
-<div>
   <p>手順</p>
-  <%# @rules.each do |rule| %>
-  <%# end %>
+  <% @play.rules.each do |rule| %>
+    <%= rule.rule_content %>
+    <%= image_tag rule.image_url, size: '200x200' %>
+  <% end %>
 </div>
 
-<%= link_to 'Edit', edit_play_path(@play) %> |
+<%= link_to 'Edit', edit_play_path(@play), data: {"turbolinks" => false} %> |
 <%= link_to 'Back', plays_path %>

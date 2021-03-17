@@ -47,6 +47,13 @@ class User < ApplicationRecord
     update(remember_digest: nil)
   end
 
+  def image_url
+    if user_image_path.nil?
+      return default_url
+    end
+    user_image_path.url
+  end
+
   private
 
     # アップロードされた画像のサイズをバリデーションする

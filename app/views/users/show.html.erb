@@ -11,12 +11,7 @@
 </p>
 
 <p>
-  <strong>Password digest:</strong>
-  <%= @user.password_digest %>
-</p>
-
-<p>
-  <strong>User image path:</strong>
+  <strong>アイコン:</strong>
   <%= image_tag @user.user_image_path.url if @user.user_image_path? %>
 </p>
 

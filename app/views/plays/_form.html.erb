@@ -68,8 +68,8 @@
       <div class="rule-form">
         <div class="rule-list" data-index=<%"#{rule.index}"%> >
           <%= rule.label :rule_content %>
-          <%= rule.text_area :rule_content, name: 'play[rule_content][]' %>
-          <%= rule.file_field :rule_image_path, name: 'play[rule_image_path][]' %>
+          <%= rule.text_area :rule_content, name: "rule[rule_content0][content]" %>
+          <%= rule.file_field :rule_image_path, name: "rule[rule_content0][image]" %>
           <button type="button" class="delete-form-btn btn btn-danger">削除する</button>
         </div>
       </div>

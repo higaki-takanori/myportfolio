@@ -11,7 +11,7 @@
           <li><%= link_to "遊びを投稿", new_play_path, data: {"turbolinks" => false} %></li>
           <li><%= link_to current_user do %>
             <%= "#{current_user.name}さん" %>
-            <%= image_tag current_user.user_image_path.url if current_user.user_image_path? %>
+            <%= image_tag current_user.image_url, size: "50x50" %>
             <% end %>
           </li>
         <% else %>
