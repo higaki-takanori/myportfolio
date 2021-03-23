@@ -1,0 +1,26 @@
+<div class="index">
+  <% @user.plays.each do |play| %>
+    <li id="play-<%= play.id %>">
+      <%= link_to play_path(play) do %>
+        <span class="img"><%= image_tag play.image_url, size: '200x200' %></span>
+        <table class="content table">
+          <tr>
+            <td>題名：<%= play.title %></td>
+            <td id="like-btn-<%= play.id %>"><%= render "likes/like", play: play %></td>
+          </tr>
+          <tr><td class="user-name">作者：<%= play.user.name %><%= image_tag play.user.image_url, size:'50x50' %></td></tr>
+          <tr><td>人数：
+                <% if play.min_player == play.max_player %>
+                  <%= play.min_player %> 人
+                <% else %>
+                  <%= play.min_player %> ~ <%= play.max_player %> 人
+                <% end %>
+          </td></tr>
+          <tr><td>場所：<%= play.place %></td></tr>
+          <tr><td>道具：<%= play.tools[0].tool_content if play.tools[0] != nil %></td></tr>
+          <tr><td><%= time_ago_in_words(play.updated_at) %>前に更新</td></tr>
+        </table>
+      <% end %>
+    </li>
+  <% end %>
+</div>
