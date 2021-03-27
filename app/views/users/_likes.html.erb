@@ -1,26 +1,7 @@
-<div class="index table">
+<div class="index">
   <% @user.likes.each do |like| %>
-    <li>
       <%= link_to play_path(like.play) do %>
-        <span class="img"><%= image_tag like.play.image_url, size: '200x200' %></span>
-        <table class="content table">
-          <tr>
-            <td>題名：<%= like.play.title %></td>
-            <td id="like-btn-<%= like.play.id %>"><%= render "likes/like", play: like.play %></td>
-          </tr>
-          <tr><td class="user-name">作者：<%= like.play.user.name %><%= image_tag like.play.user.image_url, size:'50x50' %></td></tr>
-          <tr><td>人数：
-                <% if like.play.min_player == like.play.max_player %>
-                  <%= like.play.min_player %> 人
-                <% else %>
-                  <%= like.play.min_player %> ~ <%= like.play.max_player %> 人
-                <% end %>
-          </td></tr>
-          <tr><td>場所：<%= like.play.place %></td></tr>
-          <tr><td>道具：<%= like.play.tools[0].tool_content if like.play.tools[0] != nil %></td></tr>
-          <tr><td><%= time_ago_in_words(like.play.updated_at) %>前に更新</td></tr>
-        </table>
+        <%= render 'cards/card', play: like.play %>
       <% end %>
-    </li>
   <% end %>
 </div>

@@ -13,6 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+/* @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
+*/
+
  .container {
    margin: 0;
    padding: 0;
@@ -22,3 +26,8 @@
    margin: 0;
    padding: 0;
  }
+
+ /*
+ @import "bootstrap";
+ @import "bootstrap-sprockets";
+ */

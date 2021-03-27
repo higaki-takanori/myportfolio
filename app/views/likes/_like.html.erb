@@ -1,8 +1,20 @@
       <% if current_user.id != play.user_id %>
         <% if play.liked_by?(current_user) %>
-          <p><%= link_to "お気に入り解除", play_likes_path(play), method: :delete, remote: true %></p>
+          <p><%= link_to play_likes_path(play), method: :delete, remote: true do %>
+            <i class="fas fa-star unlike-btn"></i>
+            <%= play.likes.count %>
+            <% end %>
+          </p>
         <% else %>
-          <p><%= link_to "お気に入り登録", play_likes_path(play), method: :post, remote: true %></p>
+          <p><%= link_to play_likes_path(play), method: :post, remote: true do %>
+            <i class="far fa-star like-btn"></i>
+            <%= play.likes.count %>
+            <% end %>
+          </p>
         <% end %>
+      <% else %>
+        <p>
+          <i class="fas fa-star unlike-btn"></i>
+          <%= play.likes.count %>
+        </p>        
       <% end %>
-      <%= play.likes.count %>

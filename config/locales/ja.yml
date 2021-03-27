@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+      play:
+        min_player: 最小人数
+        max_player: 最大人数
+        title: タイトル
+        outline: 概要
+        winnig_content: 勝利条件
+        place: 場所

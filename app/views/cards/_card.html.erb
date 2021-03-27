@@ -1,0 +1,23 @@
+<div class="card  mb-3">
+  <div class="row no-gutters">
+    <div class="col-md-3">
+      <span class="img"><%= image_tag play.image_url, size: '200x200' %></span>
+    </div>
+    <div class="col-md-6">
+      <div class="card-body">
+        <div class="card-header">
+          <u><%= play.title %></u>
+        </div>
+        <div><u><%= link_to user_path(play.user) do %><%= play.user.name %><%= image_tag play.user.image_url, size:'50x50' %><%end%></u></div>
+        <div class="row">
+          <div class="col-12 text-truncate">
+            概要：<%= play.outline %>
+          </div>
+        </div>
+        <div>道具：<%= play.tools[0].tool_content if play.tools[0] != nil %></div>
+        <div><%= time_ago_in_words(play.updated_at) %>前に更新</div>
+      </div>
+    </div>
+    <div id="like-btn-<%= play.id %>"><%= render "likes/like", play: play %></div>
+  </div>
+</div>

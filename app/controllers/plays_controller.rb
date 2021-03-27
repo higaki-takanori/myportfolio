@@ -29,8 +29,8 @@ class PlaysController < ApplicationController
       if @play.save
         @tool.play_id = @play.id
         @tool.save
-        rule_params.each do |tmp, content_hash|
-          @rule = Rule.new(rule_content: content_hash["content"], rule_image_path: content_hash["image"])
+        rule_params.each do |tmp, rule_hash|
+          @rule = Rule.new(rule_content: rule_hash["content"], rule_image_path: rule_hash["image"])
           @rule.play_id = @play.id
           @rule.save
         end
@@ -46,15 +46,18 @@ class PlaysController < ApplicationController
   # PATCH/PUT /plays/1 or /plays/1.json
   def update
     @tool = Tool.find_by(play_id: params[:id])
-    if @tool == nil
-      @tool = Tool.new(tool_params[:tool])
-      @tool.play_id = @play.id
-    end
+    @rule = Rule.where(play_id: params[:id])
     respond_to do |format|
       if @play.update(play_params)
-        @tool.update(tool_params[:tool]) if @tool != nil
-        @rule = Rule.where(play_id: params[:id])
-        binding.pry
+        # toolについて
+        if @tool != nil
+          @tool.update(tool_params[:tool]) 
+        else
+          @tool = Tool.new(tool_params[:tool])
+          @tool.play_id = @play.id
+          @tool.save
+        end
+        # ruleについて
         if @rule.empty?
           rule_params.each do |tmp, content_hash|
             @rule = Rule.new(rule_content: content_hash["content"], rule_image_path: content_hash["image"])
@@ -62,10 +65,8 @@ class PlaysController < ApplicationController
             @rule.save
           end
         else
-          @rule.each do |rule|
-            rule_params.each do |tmp, content_hash|
-              rule.update(rule_content: content_hash["content"], rule_image_path: content_hash["image"])
-            end
+          @rule.zip(rule_params).each do |rule, rule_hash|
+            rule.update(rule_content: rule_hash[1]["content"], rule_image_path: rule_hash[1]["image"])
           end          
         end
         format.html { redirect_to @play, notice: "Play was successfully updated." }

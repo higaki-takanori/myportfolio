@@ -1,51 +1,119 @@
 <p id="notice"><%= notice %></p>
-
 <h1><%= @play.title %></h1>
-<h2><%= @play.user.name %><%= image_tag @play.user.user_image_path.url if @play.user.user_image_path? %></h2>
+<h2><%= @play.user.name %><%= image_tag @play.user.image_url, size: '50x50' %></h2>
 
 <!--  -->
 <div>
   <%= image_tag @play.image_url, size: "200x200" %>
 </div>
-<div>
-  <strong>遊べる人数：</strong>
-  <% if @play.min_player == @play.max_player %>
-    <%= @play.min_player %> 人
-  <% else %>
-    <%= @play.min_player %> ~ <%= @play.max_player %> 人
-  <% end %>
-</div>
-<div>
-  <strong>場所：</strong>
-  <%= @play.place %>  
-</div>
 
-<div>
-  <strong>道具：</strong>
-  <%= @play.tools[0].tool_content if @play.tools[0] != nil %>
-</div>
-
-<div>
+<div class="row">
   <%= time_ago_in_words(@play.updated_at) %>前に更新
 </div>
 
-<div>
-  <p>概要</p>
-  <%= @play.outline %>
+<div class="row">
+  <div class="col-12">
+    <hr class="py-0 my-4 my-sm-5">
+  </div>
 </div>
 
-<div>
-  <p>勝ち負け</p>
-  <%= @play.outline %>
+<div class="row">
+  <div class="col-lg-4">
+    <h4 class="mb-4">遊べる人数</h4>
+  </div>
+  <div class="col-lg-8">
+    <% if @play.min_player == @play.max_player %>
+      <%= @play.min_player %> 人
+    <% else %>
+      <%= @play.min_player %> ~ <%= @play.max_player %> 人
+    <% end %>
+  </div>
 </div>
 
-<div>
-  <p>手順</p>
-  <% @play.rules.each do |rule| %>
-    <%= rule.rule_content %>
-    <%= image_tag rule.image_url, size: '200x200' %>
-  <% end %>
+<div class="row">
+  <div class="col-12">
+    <hr class="py-0 my-4 my-sm-5">
+  </div>
 </div>
 
-<%= link_to 'Edit', edit_play_path(@play), data: {"turbolinks" => false} %> |
-<%= link_to 'Back', plays_path %>
+<div class="row">
+  <div class="col-lg-4">
+    <h4 class="mb-4">場所</h4>
+  </div>
+  <div class="col-lg-8">
+    <%= @play.place %>  
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <hr class="py-0 my-4 my-sm-5">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4">
+      <h4 class="mb-4">道具</h4>
+    </div>
+    <div class="col-lg-8">
+        <%= @play.tools[0].tool_content if @play.tools[0] != nil %>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <hr class="py-0 my-4 my-sm-5">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4">
+    <h4 class="mb-4">概要</h4>
+  </div>
+  <div class="col-lg-8">
+    <%= @play.outline %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <hr class="py-0 my-4 my-sm-5">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4">
+    <h4 class="mb-4">勝利条件</h4>
+  </div>
+  <div class="col-lg-8">
+    <%= @play.winnig_content %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <hr class="py-0 my-4 my-sm-5">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4">
+    <h4 class="mb-4">手順</h4>
+  </div>
+  <div class="col-lg-8">
+    <% @play.rules.each do |rule| %>
+      <%= render 'rule_card', rule: rule %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <hr class="py-0 my-4 my-sm-5">
+  </div>
+</div>
+
+<% if current_user == @play.user %>
+  <%= link_to '修正', edit_play_path(@play), data: {"turbolinks" => false} %> |
+<% end %>
+<%= link_to '戻る', plays_path %>

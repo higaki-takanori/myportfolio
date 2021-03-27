@@ -1,7 +1,7 @@
 $(function(){
   var maxCount = 20;
   var minCount = 1;
-  var index = 0 
+  var index = $('.rule-form .rule-list').length;
   // 追加
   $('.add-form-btn').on('click', function(){
     //var inputCount = $('.rule-form .rule-list').length;
@@ -12,7 +12,7 @@ $(function(){
       // 複製したinputのクリア
       var inputList = element[0].querySelectorAll('input[type="text"], textarea');
       var inputFile = element[0].querySelectorAll('input[type="file"]');
-      index += 1
+      console.log(index);
 
       for (var i = 0; i < inputList.length; i++) {
         inputList[i].value = "";
@@ -21,6 +21,7 @@ $(function(){
         inputFile[i].name = "rule[rule_content" + index + "][image]";
       }
       $('.rule-form .rule-list').parent().append(element);// 末尾追加
+      index += 1;
     }
     else {
       alert("登録できるのは、"+ minCount + "~" + maxCount + "ルールです。");

@@ -29,7 +29,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # bootstrap
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
+
+# validation error 日本語化
+gem 'rails-i18n'
 
 # ページネーションメソッド
 gem 'will_paginate',           '3.1.7'

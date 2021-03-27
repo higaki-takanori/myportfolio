@@ -1,58 +1,47 @@
 <p id="notice"><%= notice %></p>
 
-<h1 class="title">遊び一覧</h1>
+<div class="order-md-1">
+  <h4 class="title mb-3">遊び一覧</h4>
 
-<div class="search">
-  <%= form_with(model: @play, url: search_path, method: :get, local: true) do |form| %>
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-  <div class="field">
-    <%= form.label :place %>
-    <%= form.text_field :place %>
-  </div>
-  <div class="field">
-    <%= form.label :min_player %>
-    <%= form.number_field :min_player %>
-  </div>
+  <div class="search">
+    <%= form_with(model: @play, url: search_path, method: :get, local: true) do |form| %>
+      <div class="field mb-3">
+        <%= form.label :title, "タイトル" %>
+        <%= form.text_field :title, class: "form-control" %>
+      </div>
+      <div class="field mb-3">
+        <%= form.label :place, "場所" %>
+        <%= form.text_field :place, class: "form-control" %>
+      </div>
+      <div class="field mb-3">
+        <%= form.label :min_player, "最小人数" %>
+        <%= form.number_field :min_player, class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :max_player %>
-    <%= form.number_field :max_player %>
+      <div class="field mb-3">
+        <%= form.label :max_player, "最大人数" %>
+        <%= form.number_field :max_player, class: "form-control" %>
+      </div>
+      <div class="actions mb-3">
+        <%= form.submit "検索", class: "btn btn-success center" %>
+      </div>
+    <% end %>
   </div>
-  <div class="actions">
-    <%= form.submit "検索" %>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <hr class="py-0 my-4 my-sm-5">
   </div>
-<% end %>
 </div>
 
 <%= will_paginate %>
 
 <div class="index">
   <% @plays.each do |play| %>
-    <li id="play-<%= play.id %>">
-      <%= link_to play_path(play) do %>
-        <span class="img"><%= image_tag play.image_url, size: '200x200' %></span>
-        <table class="content">
-          <tr>
-            <td>題名：<%= play.title %></td>
-            <td id="like-btn-<%= play.id %>"><%= render "likes/like", play: play %></td>
-          </tr>
-          <tr><td class="user-name">作者：<%= play.user.name %><%= image_tag play.user.image_url, size:'50x50' %></td></tr>
-          <tr><td>人数：
-                <% if play.min_player == play.max_player %>
-                  <%= play.min_player %> 人
-                <% else %>
-                  <%= play.min_player %> ~ <%= play.max_player %> 人
-                <% end %>
-          </td></tr>
-          <tr><td>場所：<%= play.place %></td></tr>
-          <tr><td>道具：<%= play.tools[0].tool_content if play.tools[0] != nil %></td></tr>
-          <tr><td><%= time_ago_in_words(play.updated_at) %>前に更新</td></tr>
-        </table>
-      <% end %>
-    </li>
+    <%= link_to play_path(play) do %>
+      <%= render 'cards/card', play: play %>
+    <% end %>
   <% end %>
 </div>
 

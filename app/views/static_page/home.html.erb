@@ -1,23 +1,72 @@
-<header>
-  <div class="title">
-    <h1>Home</h1>
-  </div>
-</header>
+<div class="title">
+  <h4>Home</h4>
 
-<body>
-  <% if logged_in? %>
-    <div>
-      <%= link_to "遊びを探す", plays_path %>
+</div>
+<div class="row">
+  <div class="col-12">
+    <hr class="py-0 my-4 my-sm-5">
+  </div>
+</div>
+
+<% if logged_in? %>
+  <div class="row">
+    <div class="col-lg-4">
+      <h4 class="mb-4">遊びを探したい方</h4>
     </div>
-    <div>
-      <%= link_to "遊びを作る", new_play_path %>
+    <div class="col-lg-8">
+      <%= link_to "遊びを探す", plays_path, class: "btn btn-info" %>
     </div>
-  <% else %>
-    <div>
-      <%= link_to "会員登録", new_user_path %>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <hr class="py-0 my-4 my-sm-5">
     </div>
-    <div>
-    <%= link_to "ログイン", login_path %>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <h4 class="mb-4">遊びを作りたい方</h4>
     </div>
-  <% end %>
-</body>
+    <div class="col-lg-8">
+    <%= link_to "遊びを作る", new_play_path, class: "btn btn-success" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <hr class="py-0 my-4 my-sm-5">
+    </div>
+  </div>
+
+<% else %>
+  <div class="row">
+    <div class="col-lg-4">
+      <h4 class="mb-4">会員登録がまだの方</h4>
+    </div>
+    <div class="col-lg-8">
+      <%= link_to "会員登録", new_user_path, class: "btn btn-info" %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12">
+      <hr class="py-0 my-4 my-sm-5">
+    </div>
+  </div>
+
+    <div class="row">
+    <div class="col-lg-4">
+      <h4 class="mb-4">ログインはこちら</h4>
+    </div>
+    <div class="col-lg-8">
+      <%= link_to "ログイン", login_path, class: "btn btn-success"  %>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col-12">
+    <hr class="py-0 my-4 my-sm-5">
+  </div>
+</div>
