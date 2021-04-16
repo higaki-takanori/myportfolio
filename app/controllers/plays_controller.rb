@@ -57,34 +57,25 @@ class PlaysController < ApplicationController
           @tool.play_id = @play.id
           @tool.save
         end
-        # # ruleについて
-        # if @rule.empty?
-        #   rule_params.each do |tmp, content_hash|
-        #     @rule = Rule.new(rule_content: content_hash["content"], rule_image_path: content_hash["image"])
-        #     @rule.play_id = @play.id
-        #     @rule.save
-        #   end
-        # else
-          binding.pry
-          if @rule.length != rule_params.length
-            @rule.each do |rule|
-              rule.destroy
-            end
-            rule_params.each do |tmp, content_hash|
-              @rule = Rule.new(rule_content: content_hash["content"], rule_image_path: content_hash["image"])
-              @rule.play_id = @play.id
-              @rule.save
-            end
-          else
-            @rule.zip(rule_params).each do |rule, rule_hash|
-              if rule_hash[1]["image"].present?
-                rule.update(rule_content: rule_hash[1]["content"], rule_image_path: rule_hash[1]["image"])
-              else
-                rule.update(rule_content: rule_hash[1]["content"])
-              end
-            end          
+        # ruleについて
+        if @rule.length != rule_params.length
+          @rule.each do |rule|
+            rule.destroy
           end
-        # end
+          rule_params.each do |tmp, content_hash|
+            @rule = Rule.new(rule_content: content_hash["content"], rule_image_path: content_hash["image"])
+            @rule.play_id = @play.id
+            @rule.save
+          end
+        else
+          @rule.zip(rule_params).each do |rule, rule_hash|
+            if rule_hash[1]["image"].present?
+              rule.update(rule_content: rule_hash[1]["content"], rule_image_path: rule_hash[1]["image"])
+            else
+              rule.update(rule_content: rule_hash[1]["content"])
+            end
+          end          
+        end
         format.html { redirect_to @play, notice: "Play was successfully updated." }
         format.json { render :show, status: :ok, location: @play }
       else
