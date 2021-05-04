@@ -40,7 +40,7 @@ gem 'will_paginate',           '3.1.7'
 gem 'bootstrap-will_paginate', '1.0.0'
 
 # 画像アップローダー
-gem 'carrierwave'
+gem 'carrierwave', "~> 2.2.1"
 gem 'mini_magick'
 #gem "mimemagic", "~> 0.3.10"
 

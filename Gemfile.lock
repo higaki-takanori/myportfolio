@@ -238,7 +238,7 @@ DEPENDENCIES
   bootstrap-will_paginate (= 1.0.0)
   byebug
   capybara (>= 2.15)
-  carrierwave
+  carrierwave (~> 2.2.1)
   jbuilder (~> 2.7)
   listen (~> 3.2)
   mini_magick
